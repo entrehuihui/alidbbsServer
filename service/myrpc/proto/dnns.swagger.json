@@ -1,0 +1,149 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "dnns.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/types": {
+      "get": {
+        "summary": "获取公网IP",
+        "operationId": "Dnns_dnnsGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protodnnsGetResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "Dnns"
+        ]
+      },
+      "post": {
+        "summary": "修改DNS",
+        "operationId": "Dnns_dnnsPost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protodnnsPostResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protodnnsPostReq"
+            }
+          }
+        ],
+        "tags": [
+          "Dnns"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "protodnnsGetResp": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "protodnnsPostReq": {
+      "type": "object",
+      "properties": {
+        "AccessKeyId": {
+          "type": "string"
+        },
+        "AccessKeySecret": {
+          "type": "string"
+        },
+        "Endpoint": {
+          "type": "string"
+        },
+        "RecordId": {
+          "type": "string"
+        },
+        "RR": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "protodnnsPostResp": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

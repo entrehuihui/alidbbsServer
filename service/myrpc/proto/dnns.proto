@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "test/service/myrpc/proto";
+
+import "google/api/annotations.proto";
+
+service Dnns {
+  // 修改DNS
+  rpc dnnsPost(dnnsPostReq) returns (dnnsPostResp) {
+    option (google.api.http) = {
+      post : "/v1/types",
+      body : "*"
+    };
+  };
+  // 获取公网IP
+  rpc dnnsGet(dnnsGetReq) returns (dnnsGetResp) {
+    option (google.api.http) = {
+      get : "/v1/types"
+    };
+  };
+}
+
+message dnnsPostReq {
+  string AccessKeyId = 1;
+  string AccessKeySecret = 2;
+  string Endpoint = 3;
+  string RecordId = 4;
+  string RR = 5;
+  string Type = 6;
+  string Value = 7;
+}
+
+message dnnsPostResp { string message = 1; }
+message dnnsGetReq {}
+message dnnsGetResp {
+  string message = 1;
+  string data = 2;
+}

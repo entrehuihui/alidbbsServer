@@ -1,0 +1,15 @@
+version: '3.0'
+services:
+  server:
+    image: alpine:latest
+    ports:
+      - 23777:23777
+    volumes:
+      - $PWD:/dnnsServe
+      - /etc/localtime:/etc/localtime:ro
+    working_dir: /dnnsServe
+    command: ./dnnsServe
+    restart: always
+    logging:
+      options:
+        max-size: "100m"
